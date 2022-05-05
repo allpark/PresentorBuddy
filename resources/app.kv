@@ -1,0 +1,195 @@
+
+
+<Main>:
+    BoxLayout:
+
+        # layout properties properties 
+        orientation: 'vertical'
+        padding: 10
+
+        # set canvas properties
+        canvas:
+            Color:
+                rgb: 1,1,1
+            Rectangle:
+                size: self.size
+
+        # title
+        Label:
+            text: 'Presenter Buddy'
+            size_hint: 1, None
+            font_size: 30
+            padding_y: 30
+            color: 0,0,0,1
+            bold: True
+
+        # webcam image source
+        Image:
+            id: webcam_preview
+            source: "images/camera_overlay.png" 
+            size: 640,480
+ 
+        Label:
+            text: 'Keep your face in the middle of the webcam'
+            size_hint: 1, 0.1
+            color: 0,0,0,1
+            bold: True
+
+        Button:
+            id: btn_mainscreen_record
+            text: 'Start Recording'
+            on_press: root.on_record_press()
+            size_hint: 0.5, None
+            height: 40
+
+            color: 0,0,0,1
+            background_normal: ''
+            background_color: 1, 1, 1, 1
+            bold: True
+
+            pos_hint: {'x': .25}
+      
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+    
+        Spinner:
+            id: camera_id
+            text:'select camera id'
+            values: [str(x) for x in range(-1, 11)]
+            size_hint: 0.5, None
+            height: 40
+
+
+            color: 0,0,0,1
+            background_normal: ''
+            background_color: 1, 1, 1, 1
+
+            pos_hint: {'x': .25}
+
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
+            on_text: root.camera_selector(camera_id.text)
+    
+        
+
+<VideoAnalysisScreen>:
+    BoxLayout:
+        # layout properties properties 
+        orientation: 'vertical'
+        padding: 10
+
+        # set canvas properties
+        canvas:
+            Color:
+                rgb: 1,1,1
+            Rectangle:
+                size: self.size
+
+        # title
+        Label:
+            text: 'Presenter Buddy'
+            size_hint: 1, None
+            font_size: 30
+            color: 0,0,0,1
+            bold: True
+
+        Label:
+            text: 'Presentation Analysis Results'
+            text_size: self.size
+            font_size: 25
+            color: 0,0,0,1
+            bold: True
+
+
+        Label: 
+            id: label_overall_score
+            text: 'Overall Score: X/100'
+            text_size: self.size
+            font_size: 20
+            color: 0,0,0,1
+  
+
+        Label:
+            text: 'Positivity Scores'
+            text_size: self.size
+            font_size: 25
+            color: 0,0,0,1
+            bold: True
+
+
+        Label: 
+            id: label_visual_score
+            text: 'Visual: X/100'   
+            text_size: self.size
+            font_size: 20
+            color: 0,0,0,1
+   
+
+        Label:
+            id: label_audio_score
+            text: 'Audio: X/100'
+            text_size: self.size
+            font_size: 20
+            color: 0,0,0,1
+
+
+        Label: 
+            text: 'Feedback'   
+            padding_y: 5
+            bold: True
+            text_size: self.size
+            font_size: 25
+            color: 0,0,0,1
+            bold: True
+
+        Label: 
+            id: label_feedback_visual
+            text: 'Visual: None'   
+            text_size: self.size
+            font_size: 20
+            color: 0,0,0,1
+
+        Label:
+            id: label_feedback_audio
+            text: 'Audio: None'
+            text_size: self.size
+            font_size: 20
+            color: 0,0,0,1
+            padding_y: 30
+
+        Button:
+            text: 'Back'
+            on_press: root.manager.current = 'main'
+            size_hint: 0.5, None
+            height: 40
+
+            color: 0,0,0,1
+            background_normal: ''
+            background_color: 1, 1, 1, 1
+            bold: True
+
+            pos_hint: {'x': .25}
+
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
